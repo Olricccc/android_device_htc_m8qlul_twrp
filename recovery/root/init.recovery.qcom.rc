@@ -1,98 +1,33 @@
+import /init.recovery.qcom_decrypt.rc
+
 on init
-    # exfat
-    insmod /system/lib/modules/texfat.ko
+    wait /dev/block/platform/${ro.boot.bootdevice}
+    symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
 
 on fs
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0f87
-    write /sys/class/android_usb/android0/f_ffs/aliases adb
-    write /sys/class/android_usb/android0/functions mtp,adb
-    write /sys/class/android_usb/android0/iManufacturer ${ro.product.manufacturer}
-    write /sys/class/android_usb/android0/iProduct ${ro.product.model}
-    write /sys/class/android_usb/android0/iSerial ${ro.serialno}
+    export LD_PRELOAD /sbin/liblog_htc_sbin.so
 
 on boot
+    start choice_fn
     start chargeled
 
 on property:ro.bootmode=offmode_charging
+    stop recovery
     start detect_key
     start offmode_charging
-    stop recovery
-
-# Used to disable USB when switching states
-on property:sys.usb.config=none
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/bDeviceClass 0
-    setprop sys.usb.state ${sys.usb.config}
-
-# this is for M charge-only
-on property:sys.usb.config=charged
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0f0b
-    write /sys/class/android_usb/android0/functions charging
-    write /sys/class/android_usb/android0/enable 1
-    write /sys/devices/platform/android_usb/usb_function_switch 1048576
-    setprop sys.usb.state ${sys.usb.config}
-
-# this is for M charge-only but USB debugging is on, we switch to adb
-on property:sys.usb.config=charged,adb
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0c81
-    write /sys/class/android_usb/android0/functions adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    write /sys/devices/platform/android_usb/usb_function_switch 2
-    setprop sys.usb.state ${sys.usb.config}
-
-# adb only USB configuration
-# This is the fallback configuration if the
-# USB manager fails to set a standard configuration
-on property:sys.usb.config=adb
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0c81
-    write /sys/class/android_usb/android0/functions adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    write /sys/devices/platform/android_usb/usb_function_switch 2
-    setprop sys.usb.state ${sys.usb.config}
-
-on property:sys.usb.config=mass_storage,adb
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0c02
-    write /sys/class/android_usb/android0/functions mass_storage,adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    write /sys/devices/platform/android_usb/usb_function_switch 3
-    setprop sys.usb.state ${sys.usb.config}
-
-on property:sys.usb.config=mtp,adb
-    stop adbd
-    write /sys/class/android_usb/android0/enable 0
-    write /sys/class/android_usb/android0/idVendor 0bb4
-    write /sys/class/android_usb/android0/idProduct 0f87
-    write /sys/class/android_usb/android0/functions mtp,adb
-    write /sys/class/android_usb/android0/enable 1
-    start adbd
-    write /sys/devices/platform/android_usb/usb_function_switch 130
-    setprop sys.usb.state ${sys.usb.config}
 
 service chargeled /sbin/chargeled
     disabled
     seclabel u:r:healthd:s0
 
+service choice_fn /sbin/choice_fn
+    oneshot
+    seclabel u:r:recovery:s0
+
 service detect_key /sbin/detect_key
     disabled
-    seclabel u:r:healthd:s0
     oneshot
+    seclabel u:r:healthd:s0
 
 service offmode_charging /sbin/offmode_charging
     disabled

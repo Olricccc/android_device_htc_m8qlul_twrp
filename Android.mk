@@ -14,10 +14,8 @@
 # limitations under the License.
 #
 
-ifeq ($(TARGET_DEVICE),m8qlul)
-
 LOCAL_PATH := $(call my-dir)
-include $(call all-subdir-makefiles,$(LOCAL_PATH))
 
-include $(CLEAR_VARS)
+ifneq ($(filter m8qlul,$(TARGET_DEVICE)),)
+include $(call all-makefiles-under,$(LOCAL_PATH))
 endif
