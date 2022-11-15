@@ -1,8 +1,8 @@
-TeamWin Recovery Project
+* TeamWin Recovery Project
 
-Device files for HTC One (M8s)
+* Device files for HTC One (M8s)
 
-Builds with OmniROM android-6.0 tree
+* Builds with OmniROM android-6.0 tree
 
 * Ported from https://github.com/TeamWin/android_device_htc_m8
 
@@ -21,12 +21,12 @@ Blocking checks
 
 Medium checks
 - [?] update.zip sideload
-- [?] UI colors (red/blue inversions)
+- [x] UI colors (red/blue inversions)
 - [x] Screen goes off and on
 - [x] F2FS/EXT4 Support, exFAT/NTFS where supported
 - [x] all important partitions listed in mount/backup lists
-- [?] backup/restore to/from external (USB-OTG) storage (not supported by the device)
-- [?] backup/restore to/from adb (https://gerrit.omnirom.org/#/c/15943/)
+- [x] backup/restore to/from external (USB-OTG) storage (not supported by the device)
+- [x] backup/restore to/from adb (https://gerrit.omnirom.org/#/c/15943/)
 - [?] decrypt /data
 - [x] Correct date
 
@@ -37,10 +37,10 @@ Minor checks
 - [x] poweroff
 - [x] battery level
 - [x] temperature
-- [?] encrypted backups
-- [?] input devices via USB (USB-OTG) - keyboard, mouse and disks (not supported by the device)
-- [?] USB mass storage export
+- [ ] encrypted backups
+- [x] input devices via USB (USB-OTG) - keyboard, mouse and disks (not supported by the device)
+- [x] USB mass storage export
 - [x] set brightness
 - [x] vibrate
-- [?] screenshot
+- [x] screenshot
 - [?] partition SD card
