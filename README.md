@@ -7,7 +7,7 @@
 * Ported from https://github.com/TeamWin/android_device_htc_m8
 
 
-FOR VERSION 0.2
+FOR VERSION 0.2.1
 ---------------------------------
 [?] = Unknown
 
