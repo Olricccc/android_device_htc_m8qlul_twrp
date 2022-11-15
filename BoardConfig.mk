@@ -94,7 +94,15 @@ BOOTLOADER_MESSAGE_OFFSET := 2048
 TW_THEME := portrait_hdpi
 TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_INCLUDE_CRYPTO := true
-TW_NO_EXFAT_FUSE := true
+TW_EXCLUDE_SUPERSU := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_NEW_ION_HEAP := true
+
+#Comment taken from https://forum.xda-developers.com/t/twrp-flags-for-boardconfig-mk.3333970 \
+TW_NEW_ION_HEAP \
+this has something to do with 3.10 kernels and a different naming in /include/linux/ion.h ... like a switch between old heap_mask and new heap_id_mask
+
+
 
 # TWRP Debugging
 #TWRP_EVENT_LOGGING := true
