@@ -21,7 +21,7 @@ PRODUCT_PLATFORM := msm8939
 # The below variables will be generated automatically
 #
 # Release name (automatically taken from this file's suffix)
-PRODUCT_RELEASE_NAME := $(lastword $(subst /, ,$(lastword $(subst _, ,$(firstword $(subst ., ,$(MAKEFILE_LIST)))))))
+PRODUCT_RELEASE_NAME := m8qlul
 
 # Custom vendor used in build tree (automatically taken from this file's prefix)
 CUSTOM_VENDOR := $(lastword $(subst /, ,$(firstword $(subst _, ,$(firstword $(MAKEFILE_LIST))))))
@@ -30,14 +30,14 @@ CUSTOM_VENDOR := $(lastword $(subst /, ,$(firstword $(subst _, ,$(firstword $(MA
 $(call inherit-product, vendor/$(CUSTOM_VENDOR)/config/common.mk)
 
 # OEM Info (automatically taken from device tree path)
-BOARD_VENDOR := $(or $(word 2,$(subst /, ,$(firstword $(MAKEFILE_LIST)))),$(value 2))
+BOARD_VENDOR := htc
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_DEVICE := $(PRODUCT_RELEASE_NAME)
-PRODUCT_NAME := $(CUSTOM_VENDOR)_$(PRODUCT_DEVICE)
-PRODUCT_BRAND := $(BOARD_VENDOR)
-PRODUCT_MODEL := $(shell echo $(PRODUCT_BRAND) | tr  '[:lower:]' '[:upper:]') One_$(shell echo $(PRODUCT_DEVICE) | tr  '[:lower:]' '[:upper:]')
-PRODUCT_MANUFACTURER := $(PRODUCT_BRAND)
+PRODUCT_DEVICE := m8qlul
+PRODUCT_NAME := omni_m8qlul
+PRODUCT_BRAND := htc
+PRODUCT_MODEL := m8qlul
+PRODUCT_MANUFACTURER := htc
 
 # Inherit from common device configuration
 $(call inherit-product, device/$(PRODUCT_BRAND)/$(PRODUCT_DEVICE)/device.mk)
