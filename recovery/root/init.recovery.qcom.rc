@@ -1,5 +1,3 @@
-import /init.recovery.qcom_decrypt.rc
-
 on init
     wait /dev/block/platform/${ro.boot.bootdevice}
     symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
@@ -32,3 +30,5 @@ service detect_key /sbin/detect_key
 service offmode_charging /sbin/offmode_charging
     disabled
     seclabel u:r:healthd:s0
+    
+import /init.recovery.qcom_decrypt.rc

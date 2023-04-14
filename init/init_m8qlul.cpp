@@ -117,12 +117,21 @@ void vendor_load_properties()
 
     property_get("ro.boot.mid", bootmid);
 
+/* 
+  0PKV10000 - HTC One M8s Europe
+  0PKV20000 - HTC One M8s China
+*/
 if (strstr(bootmid, "0PKV")) {
-   if (strstr(bootmid, "0PKV10000")) {
+   if (strstr(bootmid, "0PKV20000")) {
+    property_set("ro.build.product", "htc_m8qltuhl");
+            property_set("ro.product.device", "htc_m8qltuhl");
+            property_set("ro.product.model", "HTC One M8s");
+        } 
+         else {
     property_set("ro.build.product", "htc_m8qlul");
             property_set("ro.product.device", "htc_m8qlul");
             property_set("ro.product.model", "HTC One M8s");
-        } 
+              } 
         }
 
     set_props_from_build();
