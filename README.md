@@ -4,11 +4,6 @@
 
 * Builds with OmniROM android-6.0 tree
 
-* Ported from https://github.com/TeamWin/android_device_htc_m8
-
-
-FOR VERSION 0.2.1
----------------------------------
 [?] = Unknown
 
 Blocking checks
@@ -37,7 +32,7 @@ Minor checks
 - [x] poweroff
 - [x] battery level
 - [x] temperature
-- [ ] encrypted backups
+- [x] encrypted backups (can encrypt, but can't decrypt)
 - [x] input devices via USB (USB-OTG) - keyboard, mouse and disks (not supported by the device)
 - [x] USB mass storage export
 - [x] set brightness
